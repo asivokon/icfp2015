@@ -1,6 +1,7 @@
 (ns hextris.board
   (:require [clojure.set :refer [subset?]]
-            [clojure.string :as string]))
+            [clojure.string :as string]
+            [clojure.core :refer :all]))
 
 (defn parse-board
   "Parse board from text string, e.g.
@@ -41,6 +42,11 @@
 
 (defn unit-valid-at [board unit r c]
   (not (subset? (:members unit) (:filled board))))
+
+(defn move-unit [unit dr dc]
+  (assoc unit :members (map (fn [{:keys [x y]}] {:x (+ x dc)
+                                           :y (+ y dr)})
+                            (:members unit))))
 
 (defn enplace-unit [board unit]
   board)

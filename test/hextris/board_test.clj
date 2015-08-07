@@ -34,3 +34,8 @@
     (is (= true (unit-valid-at board1 unit1 0 0)))
     (is (= false (unit-valid-at board1 unit1 2 7)))))
 
+(deftest move-unit-test
+  (testing "moving unit"
+    (is (= [{:x 10 :y 15}
+            {:x 12 :y 15}]
+           (:members (move-unit unit1 15 10))))))
