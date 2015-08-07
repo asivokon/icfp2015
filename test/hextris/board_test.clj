@@ -21,8 +21,6 @@
 
 (assert (not (empty? (:filled board1))) "board1 is not parsed correctly")
 
-(print board1)
-
 ; # . #
 (def unit1
   {:members [{:x 0 :y 0}
@@ -34,7 +32,7 @@
   (testing "shifting unit"
     (is (= #{{:x 10 :y 15}
              {:x 12 :y 15}}
-           (:members (shift-unit unit1 15 10))))))
+           (:members (shift-unit unit1 10 15))))))
 
 (deftest lock-unit-test
   (testing "modify board to lock unit"
@@ -45,4 +43,4 @@
   (testing "detect if the unit can be placed at the board"
     (is (= true (unit-valid-at board1 unit1 0 0)))
     (is (= true (unit-valid-at board1 unit1 0 0)))
-    (is (= false (unit-valid-at board1 unit1 2 4)))))
+    (is (= false (unit-valid-at board1 unit1 2 7)))))
