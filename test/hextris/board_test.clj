@@ -39,6 +39,19 @@
     (is (contains? (:filled (lock-unit board1 unit1))
                    {:x 0 :y 0}))))
 
+(deftest remove-unit-test
+  (testing "removing unit from the board"
+    (let [board-with-unit (lock-unit board1 unit1)]
+      (is (not (contains? (:filled (remove-unit board-with-unit unit1)) {:x 0 :y 0}))))))
+
+(deftest move-unit-test
+  (testing "moving unit removes from previous location"
+    (let [board-with-unit-0 (lock-unit board1 unit1)
+          board-with-unit-1 (move-unit board-with-unit-0 unit1 1 1)]
+      (is (contains? (:filled board-with-unit-0) {:x 0 :y 0}))
+      (is (contains? (:filled board-with-unit-1) {:x 1 :y 1}))
+      (is (not (contains? (:filled board-with-unit-1) {:x 0 :y 0}))))))
+
 (deftest unit-valid-at-test
   (testing "detect if the unit can be placed at the board"
     (is (= true (unit-valid-at board1 unit1 0 0)))
